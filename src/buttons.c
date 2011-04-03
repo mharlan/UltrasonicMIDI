@@ -1,7 +1,7 @@
 #include "buttons.h"
 #include "timer.h"
 #include "macro.h"
-#include "temp_sensors.h"
+#include "MIDI_messages.h"
 
 #include <zneo.h>
 
@@ -95,15 +95,11 @@ static void handle_button_events(void)
 		if(button_twice_timer && (last_button == BUTTON_ONE)) {
 			button_twice_timer = 0;
 			last_button = BUTTON_NONE;
-
-			if(temp_sensors_is_enabled() == LM34DZ_EN) {
-				temp_sensors_disable();
-			}
 		}
 		else {
 			last_button = BUTTON_ONE;
-
-			temp_sensors_enable(LM34DZ_EN);
+			
+			midi_msg_note_on(MIDI_CHANNEL1, 0x3C);
 			macro_execute(MACRO0);
 		}
 	}
@@ -111,15 +107,11 @@ static void handle_button_events(void)
 		if(button_twice_timer && (last_button == BUTTON_TWO)) {
 			button_twice_timer = 0;
 			last_button = BUTTON_NONE;
-
-			if(temp_sensors_is_enabled() == TMP04_EN) {
-				temp_sensors_disable();
-			}
 		}
 		else {
 			last_button = BUTTON_TWO;
 
-			temp_sensors_enable(TMP04_EN);
+			midi_msg_note_off(MIDI_CHANNEL1, 0x3C);
 			macro_execute(MACRO1);
 		}
 	}

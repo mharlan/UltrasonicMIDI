@@ -23,7 +23,7 @@
  */
 
 #include "LED.h"
-#include "temp_sensors.h"
+#include "MIDI_out.h"
 #include "oscillator.h"
 #include "buttons.h"
 #include "timer.h"
@@ -42,9 +42,9 @@ void main(void)
 	init_oscillator(OSC_5_52MHZ);
 	init_timer(TIMER_2MS);
 
+	init_midi_out();
 	init_buttons();
 	init_leds();
-	init_temp_sensors();
 
 	//initialize the command line interface
 	init_cli();

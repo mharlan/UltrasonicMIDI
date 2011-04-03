@@ -5,7 +5,7 @@
 
 static int osc_clock;
 
-#define CLOCK_5_52MHZ   5520000
+#define CLOCK_5_52MHZ   5529600
 #define CLOCK_18_432MHZ 18432000
 
 /*

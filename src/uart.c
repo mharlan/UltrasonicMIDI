@@ -89,7 +89,7 @@ void init_uart(void)
 
 	// Set the baud rate
     // BRG = freq/( baud * 16)
-    U0BR = FREQ/((unsigned long)DEFAULT_BAUD * 16UL);
+    U0BR = FREQ / (DEFAULT_BAUD * 16UL);
 	baudrate = DEFAULT_BAUD;
 
     // U0 control
@@ -254,7 +254,7 @@ void uart_set_baudrate(unsigned long baud)
 
 	// Set the baud rate
     // BRG = freq/( baud * 16)
-    U0BR = FREQ/((unsigned long)baud * 16UL);
+    U0BR = FREQ / (baud * 16UL);
 	baudrate = baud;
 
 	uart_enable();
