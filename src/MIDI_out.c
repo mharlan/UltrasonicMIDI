@@ -3,6 +3,7 @@
  */
 
 #include "MIDI_out.h"
+//#include "bit_ops.h"
 
 #include <zneo.h>
 
