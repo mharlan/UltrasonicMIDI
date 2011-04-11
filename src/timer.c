@@ -1,4 +1,6 @@
+
 #include "timer.h"
+#include "MIDI_sensors.h"
 #include "oscillator.h"
 #include "LED.h"
 #include "buttons.h"
@@ -30,6 +32,7 @@ void interrupt timer_isr(void)
 
 	led_update();
 	button_events();
+	midi_sensors_event();
 }
 
 void init_timer(int mode)

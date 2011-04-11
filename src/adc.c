@@ -3,41 +3,44 @@
 
 #include <zneo.h>
 
+#define ADC_CHANNELS 2
+#define ADC_CH_MASK  0x0F
+
+#define ADC_IRQ0_EN  0x01
+
 #define ADC0CTL_START0 0x80
 #define ADC0CTL_CVTRD0 0x40
 #define ADC0CTL_REFEN  0x20
 #define ADC0CTL_ADC0EN 0x10
-#define ADC0CTL_ANA0   0x00
-#define ADC0CTL_ANA1   0x01
-#define ADC0CTL_ANA2   0x02
-#define ADC0CTL_ANA3   0x03
-#define ADC0CTL_ANA4   0x04
-#define ADC0CTL_ANA5   0x05
-#define ADC0CTL_ANA6   0x06
-#define ADC0CTL_ANA7   0x07
-#define ADC0CTL_ANA8   0x08
-#define ADC0CTL_ANA9   0x09
-#define ADC0CTL_ANA10  0x0A
-#define ADC0CTL_ANA11  0x0B
 
-void init_adc(void)
+static short adc_values[ADC_CHANNELS];
+
+static void (*adc_proc)(unsigned char channel, short value);
+
+void interrupt adc_read(void)
 {
-	PBAFL = 0x01;          // Enable Alt Fun 1 on PA0
-    ADC0CTL = ADC0CTL_REFEN  + ADC0CTL_ADC0EN;
-}
-
-
-short adc_read(void)
-{
+	unsigned char channel;
 	short value;
 
-    ADC0CTL |= ADC0CTL_START0;
-
-    // conversion takes time, wait for it
-    while (ADC0CTL & 0x80);
-
+	channel = ADC0CTL & ADC_CH_MASK;
     value = ADC0D >> 6;
 
-    return value;	
+    adc_proc(channel, value);
 }
 
+void init_adc(void (*adc_func)(unsigned char channel, short value))
+{
+	PBAFL |= 0x03;          // Enable Alt Fun 1 on PB0 and PB1
+
+	IRQ0ENL &= ~ADC_IRQ0_EN;
+	IRQ0ENH |= ADC_IRQ0_EN;
+
+	SET_VECTOR(ADC, adc_read);
+
+	adc_proc = adc_func;
+}
+
+void adc_start(unsigned char channel)
+{
+	ADC0CTL = ADC0CTL_ADC0EN | ADC0CTL_START0 | channel;
+}
