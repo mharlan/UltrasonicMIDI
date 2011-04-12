@@ -1,7 +1,6 @@
 #include "buttons.h"
 #include "timer.h"
 #include "macro.h"
-#include "MIDI_messages.h"
 
 #include <zneo.h>
 
@@ -99,7 +98,6 @@ static void handle_button_events(void)
 		else {
 			last_button = BUTTON_ONE;
 			
-			midi_msg_note_on(MIDI_CHANNEL1, 0x3C);
 			macro_execute(MACRO0);
 		}
 	}
@@ -111,7 +109,6 @@ static void handle_button_events(void)
 		else {
 			last_button = BUTTON_TWO;
 
-			midi_msg_note_off(MIDI_CHANNEL1, 0x3C);
 			macro_execute(MACRO1);
 		}
 	}

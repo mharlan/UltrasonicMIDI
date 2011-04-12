@@ -1,29 +1,9 @@
 /*
 	Author: Matthew Harlan
 	Email:  mharlan@gwmail.gwu.edu
-<<<<<<< HEAD
 	
 	Firmware for a MIDI controller that uses two analog ultrasonic
 	distance sensors to generate MIDI events.
-=======
-	Class:  CSCI-4415
-	Date: 	March 29th, 2011
-	Lab:    Final Project
-	
-	Description: This program drives a MIDI output port.
-
-	Other files: adc.c adc. h bit_ops.c bit_ops.h buttons.c buttons.h cli.c cli.h delay.c delay.h 
-	info.c info.h LED.c LED.h LED_ascii.h macro.c macro.h MIDI_out.c MIDI_out.h MIDI_messages.c 
-	MIDI_messages.h oscillator.c oscillator.h ports.c ports.h timer.c timer.h uart.c uart.h
-
-	Compile: Set the user include path to the include directory.
-	
-	Problems: The MIDI output specification is very confusing.
-
-	Comments: 
-
-	Enhancements: None.
->>>>>>> cb1cc7e019a28c413f0c3f94997c90c35450e15a
  */
 
 #include "LED.h"
