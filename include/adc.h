@@ -19,11 +19,11 @@
 
 	Currently only runs in sample mode, not freerun.
  */
-void init_adc(void (*adc_func)(unsigned char channel, short value));
+extern void init_adc(void (*adc_func)(unsigned char channel, short value));
 
 /*
 	Start an ADC conversion.
  */
-void adc_start(unsigned char channel);
+extern void adc_start(unsigned char channel);
 
 #endif

@@ -7,13 +7,15 @@
 
 #define SENSOR_MIN   7  //inches
 #define SENSOR_MAX   43
-#define SENSOR_DIV   2
+#define SENSOR_DIV   3
 
 //18 (1 full octave plus extra)
 #define SENSOR_RANGE ((SENSOR_MAX - SENSOR_MIN) / SENSOR_DIV)
 
-void init_midi_sensors(void);
+extern void init_midi_sensors(unsigned char s1_mode, unsigned char s2_mode);
 
-void midi_sensors_event(void);
+extern void midi_sensors_event(void);
+
+extern void midi_sensors_switch_mode(unsigned char s1_mode, unsigned char s2_mode);
 
 #endif

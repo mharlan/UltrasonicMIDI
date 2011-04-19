@@ -18,10 +18,10 @@
 #define MIDI_CHANNEL15 0x0E
 #define MIDI_CHANNEL16 0x0F
 
-void midi_msg_note_on(unsigned char channel, unsigned char note, unsigned char velocity);
+extern void midi_msg_note_on(unsigned char channel, unsigned char note, unsigned char velocity);
 
-void midi_msg_note_off(unsigned char channel, unsigned char note, unsigned char velocity);
+extern void midi_msg_note_off(unsigned char channel, unsigned char note, unsigned char velocity);
 
-void midi_msg_ctrl_change(unsigned char channel, unsigned char ctrl_num, unsigned char ctrl_val);
+extern void midi_msg_ctrl_change(unsigned char channel, unsigned char ctrl_num, unsigned char ctrl_val);
 
 #endif

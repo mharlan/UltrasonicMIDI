@@ -4,6 +4,6 @@
 /*
 	Print the current configuration for ports A-K.
  */
-void ports_print_config(const char *port);
+extern void ports_print_config(const char *port);
 
 #endif

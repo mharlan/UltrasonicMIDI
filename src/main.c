@@ -29,7 +29,7 @@ void main(void)
 	init_oscillator(OSC_5_52MHZ);
 	init_timer(TIMER_2MS);
 
-	init_midi_sensors();
+	init_midi_sensors(SENSOR_NOTES, SENSOR_CTRL_1);
 	init_midi_out();
 	init_buttons();
 	init_leds();

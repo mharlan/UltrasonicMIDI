@@ -23,8 +23,8 @@
 #define SENSOR2_PIN 0x02
 
 #define SENSOR_VELOCITY  0x45
-#define SENSOR_CTRL1_VAL 0x07
-#define SENSOR_CTRL2_VAL 0x51
+#define SENSOR_CTRL1_VAL 0x66
+#define SENSOR_CTRL2_VAL 0x67
 
 #define DIST_TO_MAP(d) ((d - SENSOR_MIN) / SENSOR_DIV)
 
@@ -58,7 +58,7 @@ void midi_sensors_adc_proc(unsigned char channel, short value)
 	midi_sensors_msg(channel, distance);
 }
 
-void init_midi_sensors(void)
+void init_midi_sensors(unsigned char s1_mode, unsigned char s2_mode)
 {
 	sensor_timer = 0;
 	sensor_channel = ADC_CH0;
@@ -73,8 +73,8 @@ void init_midi_sensors(void)
 
 	memset(sensor_values, 0, NUM_SENSORS);
 
-	sensor_modes[0] = SENSOR_NOTES;
-	sensor_modes[1] = SENSOR_CTRL_1;
+	sensor_modes[0] = s1_mode;
+	sensor_modes[1] = s2_mode;
 
 	init_adc(midi_sensors_adc_proc);
 }
@@ -91,6 +91,12 @@ void midi_sensors_event(void)
 
 		adc_start(sensor_channel);
 	}
+}
+
+void midi_sensors_switch_mode(unsigned char s1_mode, unsigned char s2_mode)
+{
+	sensor_modes[0] = s1_mode;
+	sensor_modes[1] = s2_mode;
 }
 
 static void midi_sensors_msg(unsigned char adc_channel, unsigned char distance)

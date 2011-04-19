@@ -1,6 +1,8 @@
+
 #include "buttons.h"
 #include "timer.h"
 #include "macro.h"
+#include "MIDI_sensors.h"
 
 #include <zneo.h>
 
@@ -97,6 +99,8 @@ static void handle_button_events(void)
 		}
 		else {
 			last_button = BUTTON_ONE;
+
+			midi_sensors_switch_mode(SENSOR_NOTES, SENSOR_CTRL_1);
 			
 			macro_execute(MACRO0);
 		}
@@ -109,6 +113,8 @@ static void handle_button_events(void)
 		else {
 			last_button = BUTTON_TWO;
 
+			midi_sensors_switch_mode(SENSOR_CTRL_2, SENSOR_CTRL_1);
+
 			macro_execute(MACRO1);
 		}
 	}
@@ -119,6 +125,8 @@ static void handle_button_events(void)
 		}
 		else {
 			last_button = BUTTON_THREE;
+
+			midi_sensors_switch_mode(SENSOR_NOTES, SENSOR_NOTES);
 
 			macro_execute(MACRO2);
 		}
