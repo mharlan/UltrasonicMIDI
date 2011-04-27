@@ -39,6 +39,6 @@ void main(void)
 
 	//enable interrupts
 	EI();
-
+	
 	cli_loop();
 }

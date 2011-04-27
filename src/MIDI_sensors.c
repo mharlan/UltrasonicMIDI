@@ -12,12 +12,13 @@
 #include "timer.h"
 #include "LED.h"
 #include "adc.h"
+#include "delay.h"
 
 #include <zneo.h>
 #include <string.h>
 
 #define NUM_SENSORS   2
-#define SENSOR_CUTOFF 40 //ms
+#define SENSOR_CUTOFF 50 //ms
 
 #define SENSOR1_PIN 0x01
 #define SENSOR2_PIN 0x02
@@ -67,6 +68,13 @@ void init_midi_sensors(unsigned char s1_mode, unsigned char s2_mode)
 	PADD &= ~(SENSOR1_PIN | SENSOR2_PIN);
 	PAAFL &= ~(SENSOR1_PIN | SENSOR2_PIN);
 	PAAFH &= ~(SENSOR1_PIN | SENSOR2_PIN);
+
+	PAOUT |= SENSOR1_PIN | SENSOR2_PIN;
+
+	delay_ms(250); //power up delay
+	delay_ms(50);  //calibration delay
+	delay_ms(50);  //first reading delay
+	delay_ms(100); //post first reading residual delay
 
 	PAOUT |= SENSOR1_PIN;
 	PAOUT &= ~SENSOR2_PIN;
